@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "apollo-server": "^2.10.1",
-    "apollo-server-lambda": "^2.10.1",
+    "apollo-server-lambda": "^2.14.2",
     "aws-sdk": "2.243.1",
     "graphql": "^14.6.0",
     "knex": "^0.20.15",
