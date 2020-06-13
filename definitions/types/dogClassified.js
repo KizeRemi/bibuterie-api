@@ -6,7 +6,7 @@ module.exports = gql`
   }
 
   type Query {
-    getDogClassifieds: [DogClassified]
+    getDogClassifieds(limit: Int, offset: Int, type: DogClassifiedType!): [DogClassified]
   }
 
   type DogClassified {
@@ -20,6 +20,7 @@ module.exports = gql`
     createdAt: String!
     dogBreed: DogBreed!
     classifiedUser: ClassifiedUser!
+    type: DogClassifiedType!
   }
 
   type ClassifiedUser {
@@ -36,5 +37,11 @@ module.exports = gql`
     numberId: String!
     description: String
     dogBreed: ID!
+    type: DogClassifiedType!
+  }
+
+  enum DogClassifiedType {
+    DONATION
+    SELL
   }
 `;

@@ -17,12 +17,13 @@ const dogClassifiedResolver = {
   },
   Mutation: {
     addDogClassified: async (_, { input }, { user, postgresDb }) => {
+      console.log(await dogClassifiedRepository.addDogClassified(postgresDb, input, user));
       return Boolean(dogClassifiedRepository.addDogClassified(postgresDb, input, user));
     },
   },
   Query: {
-    getDogClassifieds: async (_, __, { postgresDb }) => {
-      return dogClassifiedRepository.getDogClassifieds(postgresDb, {});
+    getDogClassifieds: async (_, params, { postgresDb }) => {
+      return dogClassifiedRepository.getDogClassifieds(postgresDb, params);
     },
   },
 };
