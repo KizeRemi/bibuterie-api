@@ -8,6 +8,12 @@ module.exports = gql`
   }
 
   type Query {
-    getDogBreeds: [DogBreed]
+    getDogBreeds(search: String, orderBy: BREED_ORDER_BY): [DogBreed]
+  }
+
+  enum BREED_ORDER_BY {
+    ALPHABETIC
+    POPULARITY
+    MOST_COMMENTS
   }
 `;

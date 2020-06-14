@@ -2,7 +2,7 @@ const dogBreedRepository = require('../repository/postgresDogBreedRepository');
 
 const dogBreedResolver = {
   Query: {
-    getDogBreeds: (_, input, { postgresDb }) => dogBreedRepository.getDogBreeds(postgresDb),
+    getDogBreeds: (_, params, { postgresDb }) => dogBreedRepository.getDogBreeds(postgresDb, params),
   },
 };
 

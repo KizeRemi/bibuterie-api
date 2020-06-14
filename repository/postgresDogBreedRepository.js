@@ -8,6 +8,13 @@ module.exports.getDogBreedById = (ddb, dogBreedId) =>
     .where('id', dogBreedId)
     .first();
 
-module.exports.getDogBreeds = (ddb) =>
+module.exports.getDogBreeds = (ddb, { search = null, orderBy = 'ALPHABETIC' }) =>
   ddb
-    .from(DOG_BREED_TABLE_NAME);
+    .from(DOG_BREED_TABLE_NAME)
+    .orderBy('name', 'asc')
+    .modify(query => {
+      if (search) {
+        return query.whereRaw("LOWER(name) LIKE '%' || LOWER(?) || '%' ", search) 
+      }
+    }
+    );
