@@ -16,5 +16,4 @@ module.exports.getDogBreeds = (ddb, { search = null, orderBy = 'ALPHABETIC' }) =
       if (search) {
         return query.whereRaw("LOWER(name) LIKE '%' || LOWER(?) || '%' ", search) 
       }
-    }
-    );
+    });

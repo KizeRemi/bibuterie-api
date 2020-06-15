@@ -6,7 +6,7 @@ module.exports = gql`
   }
 
   type Query {
-    getDogClassifieds(limit: Int, offset: Int, type: DogClassifiedType!): [DogClassified]
+    getDogClassifieds(limit: Int, offset: Int, type: DogClassifiedType, dogBreedId: ID): [DogClassified]
   }
 
   type DogClassified {

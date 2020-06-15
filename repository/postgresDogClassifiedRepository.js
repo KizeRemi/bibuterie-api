@@ -2,11 +2,19 @@ const { v4: uuidv4 } = require('uuid');
 
 const DOG_CLASSIFIED_TABLE_NAME = 'dog_classified_table';
 
-module.exports.getDogClassifieds = (ddb, { limit = 10, offset = 0, type }) =>
+module.exports.getDogClassifieds = (ddb, { limit = 10, offset = 0, type = null, dogBreedId = null }) =>
   ddb
     .from(DOG_CLASSIFIED_TABLE_NAME)
     .orderBy('created_at')
-    .where('type', type)
+    .modify(query => {
+      if (type) {
+        query.andWhere('type', type);
+      }
+      if (dogBreedId) {
+        query.andWhere('dog_breed_id', dogBreedId) 
+      }
+      return query;
+    })
     .limit(limit)
     .offset(offset);
 
