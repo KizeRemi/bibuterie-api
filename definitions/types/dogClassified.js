@@ -38,10 +38,16 @@ module.exports = gql`
     description: String
     dogBreed: ID!
     type: DogClassifiedType!
+    gender: Gender!
   }
 
   enum DogClassifiedType {
     DONATION
     SELL
+  }
+
+  enum Gender {
+    MALE
+    FEMALE
   }
 `;

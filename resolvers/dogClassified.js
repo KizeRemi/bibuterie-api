@@ -17,7 +17,6 @@ const dogClassifiedResolver = {
   },
   Mutation: {
     addDogClassified: async (_, { input }, { user, postgresDb }) => {
-      console.log(await dogClassifiedRepository.addDogClassified(postgresDb, input, user));
       return Boolean(dogClassifiedRepository.addDogClassified(postgresDb, input, user));
     },
   },
