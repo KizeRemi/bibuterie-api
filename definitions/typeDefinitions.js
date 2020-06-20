@@ -3,6 +3,7 @@ const dogSheet = require('./types/dogSheet');
 const dogBreed = require('./types/dogBreed');
 const dogFarm = require('./types/dogFarm');
 const dogClassified = require('./types/dogClassified');
+const dogClassifiedLike = require('./types/dogClassifiedLike');
 
 module.exports = mergeTypes(
   [
@@ -10,6 +11,7 @@ module.exports = mergeTypes(
     dogBreed,
     dogFarm,
     dogClassified,
+    dogClassifiedLike,
   ],
   { all: true }
 );

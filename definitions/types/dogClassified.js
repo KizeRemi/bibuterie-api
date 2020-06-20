@@ -6,10 +6,11 @@ module.exports = gql`
   }
 
   type Query {
-    getDogClassifieds(limit: Int, offset: Int, type: DogClassifiedType, dogBreedId: ID): [DogClassified]
+    getDogClassifieds(limit: Int, offset: Int, type: DogClassifiedType, dogBreedId: ID, gender: String): [DogClassified]
   }
 
   type DogClassified {
+    id: ID!
     name: String!
     birthDate: String!
     isVaccinated: Boolean!
@@ -21,6 +22,7 @@ module.exports = gql`
     dogBreed: DogBreed!
     classifiedUser: ClassifiedUser!
     type: DogClassifiedType!
+    gender: String!
   }
 
   type ClassifiedUser {
@@ -38,16 +40,11 @@ module.exports = gql`
     description: String
     dogBreed: ID!
     type: DogClassifiedType!
-    gender: Gender!
+    gender: String!
   }
 
   enum DogClassifiedType {
     DONATION
     SELL
-  }
-
-  enum Gender {
-    MALE
-    FEMALE
   }
 `;

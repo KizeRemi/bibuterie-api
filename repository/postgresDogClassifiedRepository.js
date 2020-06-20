@@ -2,7 +2,7 @@ const { v4: uuidv4 } = require('uuid');
 
 const DOG_CLASSIFIED_TABLE_NAME = 'dog_classified_table';
 
-module.exports.getDogClassifieds = (ddb, { limit = 10, offset = 0, type = null, dogBreedId = null }) =>
+module.exports.getDogClassifieds = (ddb, { limit = 10, offset = 0, type = null, dogBreedId = null, gender = null }) =>
   ddb
     .from(DOG_CLASSIFIED_TABLE_NAME)
     .orderBy('created_at')
@@ -12,6 +12,9 @@ module.exports.getDogClassifieds = (ddb, { limit = 10, offset = 0, type = null, 
       }
       if (dogBreedId) {
         query.andWhere('dog_breed_id', dogBreedId) 
+      }
+      if (gender) {
+        query.andWhere('gender', gender) 
       }
       return query;
     })
