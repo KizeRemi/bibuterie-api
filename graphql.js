@@ -18,7 +18,6 @@ const server = new ApolloServer({
       data = await cognitoidentityserviceprovider.getUser({ AccessToken: accessToken }).promise();
     }
 
-    console.log(resolvers);
     return {
       user: data && data.Username,
       dynamoDb: dynamoDatabase,
