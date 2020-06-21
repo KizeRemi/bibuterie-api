@@ -12,6 +12,11 @@ module.exports.addDogClassifiedLike = (ddb, dogClassifiedId, userCognitoName,) =
     .into(USER_DOG_CLASSIFIED_LIKE_TABLE_NAME)
     .returning('*');
 
+module.exports.deleteDogClassifiedLike = (ddb, dogClassifiedId, userCognitoName) =>
+  ddb
+    .from(USER_DOG_CLASSIFIED_LIKE_TABLE_NAME)
+    .where({ dog_classified_id: dogClassifiedId, user_cognito_name: userCognitoName })
+    .del();
 
 module.exports.getUserDogClassifiedsLiked = (ddb, userCognitoName) =>
   ddb

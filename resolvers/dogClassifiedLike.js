@@ -3,16 +3,16 @@ const { ValidationError } = require ('apollo-server');
 
 const dogClassifiedLikeResolver = {
   Mutation: {
-    addDogClassifiedLike: async (_, { dogClassifiedId }, { user, postgresDb }) => {
+    toggleDogClassifiedLike: async (_, { dogClassifiedId }, { user, postgresDb }) => {
       const hasAlreadyLikeDogClassified = await dogClassifiedLikeRepository.getUserDogClassifiedsLikedByUserAndDogClassified(
         postgresDb, dogClassifiedId, user
       )
-      if (hasAlreadyLikeDogClassified > 0) {
-        throw new ValidationError('Dog classified already like');
-      };
-
       try {
-        return Boolean(dogClassifiedLikeRepository.addDogClassifiedLike(postgresDb, dogClassifiedId, user));
+        if (hasAlreadyLikeDogClassified.length > 0) {
+          return Boolean(await dogClassifiedLikeRepository.deleteDogClassifiedLike(postgresDb, dogClassifiedId, user));
+        };
+
+        return Boolean(await dogClassifiedLikeRepository.addDogClassifiedLike(postgresDb, dogClassifiedId, user));
       } catch(e) {
         console.log(e)
         throw e;
@@ -21,7 +21,12 @@ const dogClassifiedLikeResolver = {
   },
   Query: {
     getUserDogClassifiedsLiked: async (_, __, { user, postgresDb }) => {
-      return dogClassifiedRepository.getUserDogClassifiedsLiked(postgresDb, user);
+      const dogClassifiedsLiked = await dogClassifiedLikeRepository.getUserDogClassifiedsLiked(postgresDb, user);
+
+      return dogClassifiedsLiked.map(({ dog_classified_id, ...dogClassified }) => ({
+        dogClassifiedId: dog_classified_id,
+        ...dogClassified,
+      }))
     },
   },
 };

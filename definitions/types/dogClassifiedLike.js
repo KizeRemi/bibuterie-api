@@ -2,7 +2,7 @@ const { gql } = require('apollo-server');
 
 module.exports = gql`
   type Mutation {
-    addDogClassifiedLike(dogClassifiedId: ID!): Boolean
+    toggleDogClassifiedLike(dogClassifiedId: ID!): Boolean
   }
 
   type Query {
@@ -11,5 +11,6 @@ module.exports = gql`
 
   type DogClassifiedLike {
     user: ClassifiedUser!
+    dogClassifiedId: ID!
   }
 `;
