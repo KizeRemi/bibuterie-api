@@ -1,7 +1,15 @@
 const dogClassifiedLikeRepository = require('../repository/postgresDogClassifiedLikeRepository');
+const dogClassifiedRepository = require('../repository/postgresDogClassifiedRepository');
 const { ValidationError } = require ('apollo-server');
 
 const dogClassifiedLikeResolver = {
+  DogClassifiedLike: {
+    dogClassified: async ({ dogClassifiedId }, _, { postgresDb }) => {
+      const [dogClassified] = await dogClassifiedRepository.getDogClassifiedById(postgresDb, dogClassifiedId);
+
+      return dogClassified;
+    }
+  },
   Mutation: {
     toggleDogClassifiedLike: async (_, { dogClassifiedId }, { user, postgresDb }) => {
       const hasAlreadyLikeDogClassified = await dogClassifiedLikeRepository.getUserDogClassifiedsLikedByUserAndDogClassified(

@@ -21,6 +21,13 @@ module.exports.getDogClassifieds = (ddb, { limit = 10, offset = 0, type = null, 
     .limit(limit)
     .offset(offset);
 
+module.exports.getDogClassifiedById = (ddb, dogClassifiedId) =>
+  ddb
+    .from(DOG_CLASSIFIED_TABLE_NAME)
+    .orderBy('created_at')
+    .where('id', dogClassifiedId)
+    .limit(1);
+
 module.exports.addDogClassified = (ddb, {
   isVaccinated, isDewormed, isLof, numberId, birthDate, dogBreed, ...input
 }, userCognitoName) => {

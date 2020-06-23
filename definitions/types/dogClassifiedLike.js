@@ -12,5 +12,6 @@ module.exports = gql`
   type DogClassifiedLike {
     user: ClassifiedUser!
     dogClassifiedId: ID!
+    dogClassified: DogClassified!
   }
 `;
